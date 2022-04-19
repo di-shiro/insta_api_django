@@ -109,7 +109,7 @@ REST_FRAMEWORK = {
 
 SIMPLE_JWT = {
     'AUTH_HEADER_TYPES': ('JWT',),
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60)
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
 }
 
 
@@ -119,7 +119,7 @@ SIMPLE_JWT = {
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': str(BASE_DIR / 'db.sqlite3'),
     }
 }
 
@@ -160,7 +160,7 @@ USE_TZ = True
 通常、models.pyはデフォルトのままで、設定を変更する必要はないが、
 今回の様に変更した場合、(username を email とするなど)
 カスタマイズしたuserModel等を使うということをDjangoに知らせる必要がある。
-そのため、以下のように AUTH_SER_MODELを設定している。
+そのため、以下のように AUTH_USER_MODELを設定している。
 '''
 AUTH_USER_MODEL = 'api.User'
 
@@ -170,8 +170,10 @@ AUTH_USER_MODEL = 'api.User'
 '''
 avatar画像やPost画像の保存場所の設定
 
-BASE_DIRは、このプロジェクト最上位ディレクトリのことで、ここでは'instagram_backend_django' のこと。
-MEDIA_ROOT は、BASE_DIR直下のmediaディレクトリ(BASE_DIR/media)のことを表している。
+BASE_DIR : このプロジェクト最上位ディレクトリのことで、ここでは'instagram_backend_django' のこと。
+MEDIA_ROOT : BASE_DIR直下のmediaディレクトリ(BASE_DIR/media)のことを表している。
+MEDIA_URL : ブラウザ側からアクセスするURLとmediaディレクトリとを紐付けている
+            例えば、http://localhost:3000/media/ と入力した場合、BASE_DIR/media を指し示すことになる。
 '''
 STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

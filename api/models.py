@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, BaseUsermanager, PermissionsMixin
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.conf import settings
 
 '''
@@ -42,10 +42,10 @@ class UserManager(BaseUserManager):
     # admin user を作成する設定もoverrideしている
     # デフォルトではusernameだが、emailに変えている。
     def create_superuser(self, email, password):
-        user = self.create_user(email, password=password)
+        user = self.create_user(email, password)
         user.is_staff = True
         user.is_superuser = True
-        user.save(using=_self._db)
+        user.save(using= self._db)
 
         return user
 
