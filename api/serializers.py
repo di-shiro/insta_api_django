@@ -8,7 +8,7 @@ serializerの書き方としては、
 '''
 
 
-class userSerializer(serializers.ModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = get_user_model()
         fields = ('id', 'email', 'password')
@@ -55,7 +55,7 @@ class ProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Profile  # Profileモデルを使う
-        fields = ('id', 'nickName', 'userProfile', 'created_on', 'updated_on', 'img')
+        fields = ('id', 'nickName', 'userProfile', 'created_on', 'img')
         extra_kwargs = {'userProfile': {'read_only': True}}
 '''
 # userProfileには、現在ログインしているUserがはいる
@@ -65,7 +65,7 @@ class ProfileSerializer(serializers.ModelSerializer):
 
 
 class PostSerializer(serializers.ModelSerializer):
-    created_on = serializers.DatetimeField(format="%Y-%m-%d", read_only=True)
+    created_on = serializers.DateTimeField(format="%Y-%m-%d", read_only=True)
     class Meta:
         model = Post
         fields = ('id', 'title', 'userPost', 'created_on', 'img', 'liked')
@@ -80,5 +80,5 @@ class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
         fields = ('id', 'text', 'userComment', 'post')
-        extra_kwargs = {'userComment': {read_only: True}}
+        extra_kwargs = {'userComment': {'read_only': True}}
 

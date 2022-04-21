@@ -1,5 +1,5 @@
 from django.urls import path, include
-from . import view
+from . import views
 from rest_framework.routers import DefaultRouter
 
 
@@ -19,8 +19,8 @@ views.pyから作成したviewを呼び出して、.as_view() を付けてやる
 app_name = 'user'
 
 router = DefaultRouter()
-router.register('profile', view.ProfileViewSet)
-router.register('post', viewsPostViewSet)
+router.register('profile', views.ProfileViewSet)
+router.register('post', views.PostViewSet)
 router.register('comment', views.CommentViewSet)
 
 urlpatterns = [

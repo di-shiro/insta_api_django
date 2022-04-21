@@ -6,7 +6,7 @@ from .models import Profile, Post, Comment
 
 
 class CreateUserView(generics.CreateAPIView):
-    serializer_class = serializers.userSerializer
+    serializer_class = serializers.UserSerializer
     permission_classes = (AllowAny,)
 '''
 Userの新規作成は、まだUser登録していない利用者でも受け付けなければならないので、
@@ -49,7 +49,7 @@ get_querysetの
 
 class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
-    serializer_class = serializersPostSerializer
+    serializer_class = serializers.PostSerializer
 
     def perform_create(self, serializer):
         serializer.save(userPost=self.request.user)
